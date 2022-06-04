@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+/.vs/Algorithms_Course_Codes
+/Algorithms_Course_Codes/x64/Debug
+/x64/Debug
