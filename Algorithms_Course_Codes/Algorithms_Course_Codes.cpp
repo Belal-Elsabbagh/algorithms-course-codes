@@ -4,5 +4,5 @@
 #include "GraphColoring.h"
 int main()
 {
-    test_coloring();
+    TEST_SumOfSubsets();
 }

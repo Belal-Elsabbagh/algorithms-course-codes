@@ -49,7 +49,7 @@ inline bool GraphColoring::isSafe(vector<vector<bool>> graph, vector<int> color)
 	return true;
 }
 
-void test_coloring()
+void TEST_coloring()
 {
 	vector<vector<bool>> graph =
 	{

@@ -16,7 +16,6 @@ public:
 	};
 	Number get_total() { return this->sum_of_elements; }
 	void generate_subsets(size_t i, Number sum, Number total);
-	void print_solution();
 private:
 	std::vector<Number> number_set;
 	Number target_sum, sum_of_elements;
@@ -42,23 +41,6 @@ void SumOfSubsets<Number>::generate_subsets(size_t i, Number sum, Number total)
 	generate_subsets(i + 1, new_sum, total - pick);
 	visited_elements[i] = false;
 	generate_subsets(i + 1, sum, total - pick);
-}
-
-template<class Number>
-void SumOfSubsets<Number>::print_solution()
-{
-	if (solution_subsets.empty())
-	{
-		std::cout << "No solution was found.\n";
-		return;
-	}
-	for (size_t i = 0; i < solution_subsets.size(); i++)
-	{
-		std::cout << "Subset " << i + 1 << ":\t";
-		for (size_t j = 0; j < solution_subsets[i].size(); j++)
-			std::cout << solution_subsets[i][j] << " ";
-		std::cout << "\n";
-	}
 }
 
 template<class Number>
