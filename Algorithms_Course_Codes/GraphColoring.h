@@ -1,30 +1,37 @@
 #pragma once
 #include<iostream>
 #include <vector>
+#define NO_COLOR -1
 using namespace std;
 
 class GraphColoring
 {
 public:
-	bool color(vector<vector<bool>> graph, int numOfColors, int i, vector<int> color);
+	void color(vector<vector<bool>> graph, int numOfColors, int i, vector<int> color);
 private:
 	void printSolution(vector<int> color);
 	bool isSafe(vector<vector<bool>> graph, vector<int> color);
+	bool edge_exists(vector<vector<bool>> graph, int node1, int node2) { return graph[node1][node2]; }
+	bool adjacent_nodes_same_color(vector<vector<bool>> graph, vector<int> color, int node1, int node2) {
+		return edge_exists(graph, node1, node2) 
+			&& (color[node1] == color[node2]) 
+			&& color[node1] != NO_COLOR 
+			&& color[node2] != NO_COLOR;
+	}
 };
-bool GraphColoring::color(vector<vector<bool>> graph, int numOfColors, int i, vector<int> color)
+void GraphColoring::color(vector<vector<bool>> graph, int numOfColors, int current_node, vector<int> colors)
 {
-	if (!isSafe(graph, color)) return false;
-	if (i == graph.size())
+	if (!isSafe(graph, colors)) return;
+	if (current_node == graph.size())
 	{
-		printSolution(color);
-		return true;
+		printSolution(colors);
+		return;
 	}
-	for (int j = 1; j <= numOfColors; j++)
+	for (int color_number = 1; color_number <= numOfColors; color_number++)
 	{
-		color[i] = j;
-		if (this->color(graph, numOfColors, i + 1, color)) return true;
+		colors[current_node] = color_number;
+		color(graph, numOfColors, current_node + 1, colors);
 	}
-	return false;
 }
 
 void GraphColoring::printSolution(vector<int> color)
@@ -38,7 +45,7 @@ inline bool GraphColoring::isSafe(vector<vector<bool>> graph, vector<int> color)
 {
 	for (int i = 0; i < graph.size(); i++)
 		for (int j = i + 1; j < graph[i].size(); j++)
-			if (graph[i][j] && color[j] == color[i]) return false;
+			if (adjacent_nodes_same_color(graph, color, i, j)) return false;
 	return true;
 }
 
@@ -49,7 +56,7 @@ void test_coloring()
 		{ 0, 1, 1, 1 },
 		{ 1, 0, 1, 0 },
 		{ 1, 1, 0, 1 },
-		{ 1, 0, 1, 0 },
+		{ 1, 0, 1, 0 }
 	};
 
 	vector<vector<bool>> bigGraph =
@@ -68,10 +75,7 @@ void test_coloring()
 	};
 	GraphColoring g;
 	int m = 4;
-	vector<int> coloring(bigGraph.size());
-	for (int i = 0; i < bigGraph.size(); i++)
-		coloring[i] = 0;
+	vector<int> coloring(bigGraph.size(), NO_COLOR);
 
-	if (!g.color(bigGraph, m, 0, coloring))
-		cout << "Solution does not exist";
+	g.color(bigGraph, m, 0, coloring);
 }
