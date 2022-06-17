@@ -2,7 +2,8 @@
 #include "SumOfSubsets.h"
 #include "Prim.h"
 #include "GraphColoring.h"
+#include "NQueen.h"
 int main()
 {
-    TEST_SumOfSubsets();
+    TEST_coloring();
 }

@@ -8,7 +8,7 @@ typedef vector<vector<int>> matrix;
 class Prim
 {
 public:
-    Prim(matrix graph);
+    Prim(matrix adjacency_matrix);
 
     /**
      * @brief Get the minimum spanning tree for a graph using Prim's algorithm
@@ -45,12 +45,12 @@ private:
 * @return The constructed minimum spanning tree.
 */
 
-Prim::Prim(matrix graph)
+Prim::Prim(matrix adjacency_matrix)
 {
     int startIndex = 0;
-    this->numOfNodes = graph.size();
+    this->numOfNodes = adjacency_matrix.size();
 
-    this->reference_graph = matrix(graph);
+    this->reference_graph = matrix(adjacency_matrix);
     this->mst_parents = vector<int>(numOfNodes);
     this->visitedNodes = vector<bool>(numOfNodes, false);
     this->cost = vector<int>(numOfNodes, MAX);
@@ -115,7 +115,7 @@ inline void print_matrix(matrix mat)
 
 void TEST_prim_algorithm()
 {
-    matrix graph =
+    matrix adjacency_matrix =
     {
         { 0, 2, 0, 6, 0 },
         { 2, 0, 3, 8, 5 },
@@ -123,6 +123,6 @@ void TEST_prim_algorithm()
         { 6, 8, 0, 0, 9 },
         { 0, 5, 7, 9, 0 }
     };
-    matrix result = Prim(graph).generate_mst();
+    matrix result = Prim(adjacency_matrix).generate_mst();
     print_matrix(result);
 }

@@ -137,6 +137,7 @@
     <ClInclude Include="NQueen.h" />
     <ClInclude Include="Prim.h" />
     <ClInclude Include="SumOfSubsets.h" />
+    <ClInclude Include="DirectedWeightedGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

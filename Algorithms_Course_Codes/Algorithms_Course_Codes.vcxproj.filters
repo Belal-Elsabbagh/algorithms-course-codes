@@ -41,5 +41,8 @@
     <ClInclude Include="SumOfSubsets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DirectedWeightedGraph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
